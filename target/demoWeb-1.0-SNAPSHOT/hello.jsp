@@ -34,11 +34,13 @@ Logged in user: <b>${user}</b>
     <tr>
         <td>ID</td>
         <td>NAME</td>
+        <td>PRICE</td>
+        <td></td>
     </tr>
 <%
 try{
     Class.forName("com.mysql.jdbc.Driver");
-    String query="select * from reguser";
+    String query="select * from product";
     Connection connection = DatabaseConnection.getConnection();
     Statement statement=connection.createStatement();
     ResultSet resultSet=statement.executeQuery(query);
@@ -48,7 +50,9 @@ try{
 %>
     <tr>
     <td><%=resultSet.getInt("id") %></td>
-    <td><%=resultSet.getString("userName") %></td></tr>
+    <td><%=resultSet.getString("name") %></td>
+    <td><%=resultSet.getString("price") %></td>
+    <td><a href="buy">Buy now</a></td></tr>
         <%
 
 }

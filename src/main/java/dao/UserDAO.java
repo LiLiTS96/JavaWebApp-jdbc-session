@@ -21,7 +21,7 @@ public class UserDAO {
         try{
             con = DatabaseConnection.getConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("select userName,userPassword from reguser");
+            resultSet = statement.executeQuery("select userName,userPassword from user");
             while(resultSet.next()){
                 userNameDB = resultSet.getString("userName");
                 passwordDB = resultSet.getString("userPassword");
@@ -46,7 +46,7 @@ public class UserDAO {
         try
         {
             con = DatabaseConnection.getConnection();
-            String query = "insert into reguser(userName,userPassword) values (?,?)";
+            String query = "insert into user(userName,userPassword) values (?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
