@@ -15,14 +15,16 @@ public class UserDAO {
         Statement statement = null;
         ResultSet resultSet = null;
 
+        //int useridDB = 0;
         String userNameDB = "";
         String passwordDB = "";
 
         try{
             con = DatabaseConnection.getConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("select userName,userPassword from user");
+            resultSet = statement.executeQuery("select id, userName,userPassword from user");
             while(resultSet.next()){
+                //useridDB = resultSet.getInt("id");
                 userNameDB = resultSet.getString("userName");
                 passwordDB = resultSet.getString("userPassword");
                 if(userName.equals(userNameDB) && password.equals(passwordDB)){
