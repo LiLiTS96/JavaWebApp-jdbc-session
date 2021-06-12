@@ -2,6 +2,7 @@ package dao;
 
 import beans.UserBean;
 import connection.DatabaseConnection;
+import java.sql.PreparedStatement;
 
 import java.sql.*;
 
@@ -11,24 +12,18 @@ public class UserDAO {
         String userName = loginUserBean.getUser();
         String password = loginUserBean.getPassword();
 
-        Connection con = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        //int useridDB = 0;
-        String userNameDB = "";
-        String passwordDB = "";
-
         try{
-            con = DatabaseConnection.getConnection();
-            statement = con.createStatement();
-            resultSet = statement.executeQuery("select id, userName,userPassword from user");
+            Connection con = DatabaseConnection.getConnection();
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery("select id, userName,userPassword, userRole from user");
             while(resultSet.next()){
-                //useridDB = resultSet.getInt("id");
-                userNameDB = resultSet.getString("userName");
-                passwordDB = resultSet.getString("userPassword");
-                if(userName.equals(userNameDB) && password.equals(passwordDB)){
-                    return "SUCCESS";
+                String userNameDB = resultSet.getString("userName");
+                String passwordDB = resultSet.getString("userPassword");
+                int roleDB = resultSet.getInt("userRole");
+                if(userName.equals(userNameDB) && password.equals(passwordDB) && roleDB == 1){
+                    return "Admin_Role";
+                }else if(userName.equals(userNameDB) && password.equals(passwordDB) && roleDB == 2){
+                    return  "User_Role";
                 }
             }
         }catch(SQLException e)
@@ -43,13 +38,11 @@ public class UserDAO {
         String userName = registerBean.getUser();
         String password = registerBean.getPassword();
 
-        Connection con = null;
-        PreparedStatement preparedStatement = null;
         try
         {
-            con = DatabaseConnection.getConnection();
+            Connection con = DatabaseConnection.getConnection();
             String query = "insert into user(userName,userPassword) values (?,?)";
-            preparedStatement = con.prepareStatement(query);
+            PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
 

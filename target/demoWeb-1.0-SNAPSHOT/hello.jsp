@@ -12,13 +12,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hello!</title>
+    <title>Hello user!</title>
 </head>
 <body>
 
 <%
     HttpSession sess = request.getSession(false);
-    if(sess.getAttribute("user") == null) {
+    if(sess.getAttribute("RoleUser") == null) {
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
@@ -68,7 +68,7 @@ Logged in user: <b>${user}</b>
             e.printStackTrace();
         }
     %>
-</table>
+
 <br><br><br><br>
 Your orders
 <table border="2">

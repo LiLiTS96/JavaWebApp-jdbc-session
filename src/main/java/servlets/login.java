@@ -12,11 +12,6 @@ import java.sql.SQLException;
 @WebServlet(name = "login", value = "/login")
 public class login extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //PrintWriter out = response.getWriter();
 
@@ -30,24 +25,31 @@ public class login extends HttpServlet {
 
         UserDAO userDAO = new UserDAO();
 
-        String userValidate = null;
         try {
-            userValidate = UserDAO.autheticateUser(loginUserBean);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        if(userValidate.equals("SUCCESS"))
-        {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            request.getRequestDispatcher("hello.jsp").forward(request, response);
-        }
-        else
-        {
-            request.setAttribute("errMessage", userValidate);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+            String userValidate = UserDAO.autheticateUser(loginUserBean);
 
+            if(userValidate.equals("Admin_Role"))
+            {
+                HttpSession session = request.getSession();
+                session.setAttribute("RoleAdmin", user);
+                session.setAttribute("user", user);
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            }else if(userValidate.equals("User_Role"))
+            {
+                HttpSession session = request.getSession();
+                session.setAttribute("RoleUser", user);
+                session.setAttribute("user", user);
+                request.getRequestDispatcher("hello.jsp").forward(request, response);
+            }
+            else
+            {
+                request.setAttribute("errMessage", userValidate);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

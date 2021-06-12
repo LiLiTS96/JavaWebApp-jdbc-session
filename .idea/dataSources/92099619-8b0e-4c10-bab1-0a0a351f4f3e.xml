@@ -1172,55 +1172,137 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Host>localhost</Host>
     </user>
     <table id="334" parent="2" name="dane"/>
-    <table id="335" parent="2" name="reguser"/>
-    <column id="336" parent="334" name="id">
+    <table id="335" parent="2" name="orders"/>
+    <table id="336" parent="2" name="product"/>
+    <table id="337" parent="2" name="user"/>
+    <column id="338" parent="334" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="337" parent="334" name="imie">
+    <column id="339" parent="334" name="imie">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="338" parent="334" name="nazwisko">
+    <column id="340" parent="334" name="nazwisko">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="339" parent="334" name="PRIMARY">
+    <key id="341" parent="334" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="340" parent="335" name="id">
+    <column id="342" parent="335" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="341" parent="335" name="userName">
+    <column id="343" parent="335" name="time">
+      <Position>2</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="344" parent="335" name="user_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="345" parent="335" name="product_id">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="346" parent="335" name="user_orders___fk">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="347" parent="335" name="product_orders___fk">
+      <ColNames>product_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="348" parent="335" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="349" parent="335" name="user_orders___fk">
+      <ColNames>user_id</ColNames>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="350" parent="335" name="product_orders___fk">
+      <ColNames>product_id</ColNames>
+      <RefTableName>product</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="351" parent="336" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="352" parent="336" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="353" parent="336" name="price">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="354" parent="336" name="product_name_uindex">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="355" parent="336" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="356" parent="336" name="product_name_uindex">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>product_name_uindex</UnderlyingIndexName>
+    </key>
+    <column id="357" parent="337" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="358" parent="337" name="userName">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="342" parent="335" name="userPassword">
+    <column id="359" parent="337" name="userPassword">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="343" parent="335" name="table_name_userName_uindex">
+    <column id="360" parent="337" name="userRole">
+      <Position>4</Position>
+      <DataType>int(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>2</DefaultExpression>
+    </column>
+    <index id="361" parent="337" name="table_name_userName_uindex">
       <ColNames>userName</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="344" parent="335" name="PRIMARY">
+    <key id="362" parent="337" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="345" parent="335" name="table_name_userName_uindex">
+    <key id="363" parent="337" name="table_name_userName_uindex">
       <ColNames>userName</ColNames>
       <UnderlyingIndexName>table_name_userName_uindex</UnderlyingIndexName>
     </key>

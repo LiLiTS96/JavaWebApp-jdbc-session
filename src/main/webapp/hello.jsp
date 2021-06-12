@@ -9,16 +9,16 @@
   Time: 20:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>Hello!</title>
+    <title>Hello user!</title>
 </head>
 <body>
 
 <%
     HttpSession sess = request.getSession(false);
-    if(sess.getAttribute("user") == null) {
+    if(sess.getAttribute("RoleUser") == null) {
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
@@ -30,7 +30,7 @@ Logged in user: <b>${user}</b>
 <a href="logout">Logout</a>
 
 
-<table border="2">
+<table>
     <tr>
         <td>ID</td>
         <td>NAME</td>
@@ -68,10 +68,10 @@ Logged in user: <b>${user}</b>
             e.printStackTrace();
         }
     %>
-</table>
+
 <br><br><br><br>
 Your orders
-<table border="2">
+<table>
 
     <tr>
         <td>NAME</td>
