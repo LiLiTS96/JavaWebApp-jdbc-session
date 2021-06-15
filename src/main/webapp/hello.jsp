@@ -54,7 +54,7 @@ Logged in user: <b>${user}</b>
         </td>
         <td><%=resultSet.getString("price") %>
         </td>
-        <td><a href="buy">Buy now</a></td>
+        <td><a href=buy?id=<%=resultSet.getInt("id") %>>Buy now</a></td>
     </tr>
     <%
         }

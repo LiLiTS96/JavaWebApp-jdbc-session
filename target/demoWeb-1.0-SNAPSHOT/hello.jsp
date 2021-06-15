@@ -9,7 +9,7 @@
   Time: 20:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title>Hello user!</title>
@@ -24,13 +24,13 @@
 %>
 
 <h1>Welcome to our website!</h1>
-Logged in user: <b>${user}</b>
+Logged in user: <b>${user} ${id}</b>
 <br>
 <br>
 <a href="logout">Logout</a>
 
 
-<table border="2">
+<table>
     <tr>
         <td>ID</td>
         <td>NAME</td>
@@ -54,7 +54,7 @@ Logged in user: <b>${user}</b>
         </td>
         <td><%=resultSet.getString("price") %>
         </td>
-        <td><a href="buy">Buy now</a></td>
+        <td><a href=buy?id=<%=resultSet.getInt("id") %>>Buy now</a></td>
     </tr>
     <%
         }
@@ -71,7 +71,7 @@ Logged in user: <b>${user}</b>
 
 <br><br><br><br>
 Your orders
-<table border="2">
+<table>
 
     <tr>
         <td>NAME</td>
