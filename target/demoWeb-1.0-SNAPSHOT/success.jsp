@@ -8,11 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="resources/mystyle.css" rel="stylesheet" type="text/css">
     <title>Home Page</title>
 </head>
 <body>
-<b>User Registration Successful</b>
-<br></br>
-<b>Please <a href="login.jsp">log-in</a> to continue.</b>
+<br><br><br><br><br><br>
+<center><h1>User Registration Successful</h1>
+<br>
+<h3>Please now <a href="login.jsp">Login</a> to your account.</h3></center>
 </body>
 </html>

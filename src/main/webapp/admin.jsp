@@ -11,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
+    <link href="resources/mystyle.css" rel="stylesheet" type="text/css">
     <title>Admin Page</title>
 </head>
 
@@ -21,18 +22,20 @@
     }
 %>
 <body>
-<h2>Admin's Home</h2>
-Welcome <b>${user}</b>
 <br>
-<a href="logout">Logout</a>
-
 <br>
-Users from DB:<br>
-<table>
+<center><h1>Admin's Home</h1></center>
+<p style="text-align:right; margin-right: 20%;">Welcome: <b>${user}</b><br>
+<a href="logout">Logout</a></p>
+<br>
+<br>
+<br>
+<br>
+<p style="margin-left: 20%"><b>Users from DB:</b></p>
+<p style="margin-left: 20%"><table>
     <tr>
         <td>ID</td>
         <td>NAME</td>
-        <td></td>
     </tr>
     <%
         try {
@@ -54,7 +57,7 @@ Users from DB:<br>
     <%
         }
     %>
-</table>
+</table></p>
 <%
         resultSet.close();
         statement.close();

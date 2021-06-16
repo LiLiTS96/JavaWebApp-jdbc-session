@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Gudea:400,700);
+
+body {
+    perspective: 800px;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: "Gudea", sans-serif;
+    background: #ea5c54;
+    background: linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#EA5C54 ", endColorstr="#bb6dec",GradientType=1 );
+}
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

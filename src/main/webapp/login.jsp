@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="resources/mystyle.css" rel="stylesheet" type="text/css">
     <title>Login</title>
     <script>
         function validate()
@@ -29,19 +30,19 @@
 <jsp:setProperty name="beanUser" property="password" value="123" />
 <jsp:setProperty name="beanUser" property="id" value="1" />
 --%>
-<h4>Login</h4>
-<form name="form" action="login" method="post" onsubmit="return validate()">
-    user name: <input type="text" name="username" width="25" /><br>
-    password: <input  type="password" name="password" width="25"/> <br>
+<p style="color: crimson">${error}</p>
+<br><br><br><br><br><br>
+<center><h1>LOGIN</h1></center>
+<center><form name="form" action="login" method="post" onsubmit="return validate()">
+    <input type="text" name="username" width="30" placeholder="User Name"/><br>
+    <input  type="password" name="password" width="30" placeholder="Password"/> <br>
     <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? ""
             : request.getAttribute("errMessage")%></span>
-    <input type="submit" value="Go">
+    <input type="submit" value="LogIn">
 </form>
-<br>
-<br>
-<a href="signup.jsp">sign up</a>
+<h4>Don't have an account? <a href="signup.jsp">Sign up</a></h4>
+</center>
 
-<p style="color: crimson">${error}</p>
 
 </body>
 </html>

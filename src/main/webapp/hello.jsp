@@ -1,8 +1,7 @@
 <%@ page import="connection.DatabaseConnection" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.*" %><%--
   Created by IntelliJ IDEA.
   User: shy_h
   Date: 04.06.2021
@@ -12,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
+    <link href="resources/mystyle.css" rel="stylesheet" type="text/css">
     <title>Hello user!</title>
 </head>
 <body>
@@ -22,20 +22,20 @@
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
-
-<h1>Welcome to our website!</h1>
-Logged in user: <b>${user}</b>
 <br>
 <br>
-<a href="logout">Logout</a>
-
-
-<table>
+<center><h1>Welcome to our website!</h1></center>
+<p style="text-align:right; margin-right: 20%;">Logged in user: <b>${user}</b><br>
+<a href="logout">Logout</a></p>
+<br>
+<br>
+<br>
+<br>
+<center><table>
     <tr>
         <td>ID</td>
         <td>NAME</td>
         <td>PRICE</td>
-        <td></td>
     </tr>
 <%
     try {
@@ -54,12 +54,12 @@ Logged in user: <b>${user}</b>
         </td>
         <td><%=resultSet.getString("price") %>
         </td>
-        <td><a href="buy">Buy now</a></td>
+        <td><a href=buy?id=<%=resultSet.getInt("id") %>>Buy now</a></td>
     </tr>
     <%
         }
         %>
-</table>
+</table></center>
 <%
             resultSet.close();
             statement.close();
@@ -70,8 +70,8 @@ Logged in user: <b>${user}</b>
     %>
 
 <br><br><br><br>
-Your orders
-<table>
+<p style="margin-left: 20%"><b>Your orders</b></p>
+<p style="margin-left: 20%"> <table>
 
     <tr>
         <td>NAME</td>
@@ -81,26 +81,30 @@ Your orders
     <%
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String query = "SELECT product.name, product.price, orders.time FROM orders JOIN user on orders.user_id = user.id JOIN product on orders.product_id = product.id WHERE user.userName = '"+sess.getAttribute("user") +"'";
+            String query = "SELECT product.name, product.price, orders.time FROM orders JOIN user on orders.user_id = user.id JOIN product on orders.product_id = product.id WHERE user.userName = '"+sess.getAttribute("user") +"' order by time desc ";
             Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm:ss");
+            java.util.Date date = null;
             while (resultSet.next()) {
+                Timestamp timestamp = resultSet.getTimestamp("time");
+                if (timestamp != null)
+                    date = new java.util.Date(timestamp.getTime());
     %>
     <tr>
         <td><%=resultSet.getString("name") %>
         </td>
         <td><%=resultSet.getString("price") %>
         </td>
-        <td><%=resultSet.getString("time") %>
+        <td><%=df.format(date) %>
         </td>
     </tr>
     <%
 
         }
     %>
-</table>
+</table></p>
 <%
         resultSet.close();
         statement.close();

@@ -2,7 +2,10 @@ package servlets;
 
 import beans.UserBean;
 import dao.UserDAO;
-
+import connection.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -28,6 +31,15 @@ public class login extends HttpServlet {
         try {
             String userValidate = UserDAO.autheticateUser(loginUserBean);
 
+            Connection conn = DatabaseConnection.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("select id from user where userName='"+user+"'");
+            int id=0;
+            if(resultSet.next()){
+                id = resultSet.getInt("id");
+            }
+            conn.close();
+
             if(userValidate.equals("Admin_Role"))
             {
                 HttpSession session = request.getSession();
@@ -37,6 +49,7 @@ public class login extends HttpServlet {
             }else if(userValidate.equals("User_Role"))
             {
                 HttpSession session = request.getSession();
+                session.setAttribute("id", id);
                 session.setAttribute("RoleUser", user);
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("hello.jsp").forward(request, response);

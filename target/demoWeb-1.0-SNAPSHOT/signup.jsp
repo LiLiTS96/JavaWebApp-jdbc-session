@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="resources/mystyle.css" rel="stylesheet" type="text/css">
     <title>Sing up</title>
     <script>
         function validate()
@@ -35,18 +36,19 @@
     </script>
 </head>
 <body>
-<h4>Sign up</h4>
-<form name="form1" action="signup" method="post" onsubmit="return validate()">
-    user name: <input type="text" name="username" width="25" /><br>
-    password: <input  type="password" name="password" width="25"/> <br>
-    confirm password: <input  type="password" name="conpassword" width="25"/> <br>
+<p style="color: crimson">${error}</p>
+<br><br><br><br><br><br>
+<center><h1>SIGN UP</h1></center>
+<center><form name="form1" action="signup" method="post" onsubmit="return validate()">
+    <input type="text" name="username" width="30" placeholder="User Name"/><br>
+    <input  type="password" name="password" width="30" placeholder="Password"/> <br>
+    <input  type="password" name="conpassword" width="30" placeholder="Repeat password"/> <br>
     <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? ""
             : request.getAttribute("errMessage")%></span>
     <input type="submit" value="Register">
 </form>
-<br>
-<a href="login.jsp">login</a>
+<h4>Already have an account? <a href="login.jsp">Login</a></h4>
+</center>
 
-<p style="color: crimson">${error}</p>
 </body>
 </html>

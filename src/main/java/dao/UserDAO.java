@@ -58,4 +58,26 @@ public class UserDAO {
         return "Oops.. Something went wrong there..!";
     }
 
+    public String addOrder (int userId, int productId)
+    {
+        try {
+            Connection con = DatabaseConnection.getConnection();
+            String query = "insert into orders(time,user_id,product_id) values (?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setTimestamp(1, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(3, productId);
+
+            int i = preparedStatement.executeUpdate();
+
+            if (i!=0)
+                return "SUCCESS";
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return "Oops.. Something went wrong there..!";
+    }
+
 }
